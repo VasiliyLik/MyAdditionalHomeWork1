@@ -1,5 +1,5 @@
 //(класс) рекорд Расписание
-public record Schedule(WeekDays weekDay, Subjects subjects, Subjects subjects1) {
+public record Schedule(WorkDays weekDay, Subjects subjects, Subjects subjects1) {
 
     @Override
     public String toString() {

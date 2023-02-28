@@ -2,8 +2,8 @@
 //создаем абстрактный класс Персона
 public abstract class Person {
 
-    private final String firstName;
-    private final String surName;
+    protected final String firstName;
+    protected final String surName;
 
     public Person(String firstName, String surName) {
         this.firstName = firstName;

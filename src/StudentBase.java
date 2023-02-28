@@ -10,7 +10,7 @@ public class StudentBase implements ConsoleInputStudents, AverageScore {
     private ScoreBase[] subjectsScore = null;
 
     @Override
-    public void createStudents(int count) throws ParseException {
+    public void createStudents(int count) throws ParseException, IllegalArgumentException {
 //создаем студентов
         base = new Student[count];
         for (int i = 0; i < base.length; i++) {
@@ -26,14 +26,21 @@ public class StudentBase implements ConsoleInputStudents, AverageScore {
             Date newBirthDate = simpleDateFormat.parse(birthDate);
             Faculties faculty;
             System.out.println("input faculty");
-            final String faculties = scanner.nextLine();
-            faculty = switch (faculties) {
-                case "biology" -> Faculties.BIOLOGY;
-                case "economics" -> Faculties.ECONOMICS;
-                case "history" -> Faculties.HISTORY;
-                case "law" -> Faculties.LAW;
-                default -> Faculties.PHILOSOPHY;
-            };
+            final String faculties = scanner.nextLine().toUpperCase();
+            if (faculties.equals(Faculties.BIOLOGY.toString())) {
+                faculty = Faculties.BIOLOGY;
+            } else if (faculties.equals(Faculties.ECONOMICS.toString())) {
+                faculty = Faculties.ECONOMICS;
+            } else if (faculties.equals(Faculties.HISTORY.toString())) {
+                faculty = Faculties.HISTORY;
+            } else if (faculties.equals(Faculties.LAW.toString())) {
+                faculty = Faculties.LAW;
+            } else if (faculties.equals(Faculties.PHILOSOPHY.toString())) {
+                faculty = Faculties.PHILOSOPHY;
+            } else {
+                System.out.println("Incorrect input of faculty");
+                break;
+            }
             final ScoreBase[] scoreBase = createScoreBase(2);
             base[i] = new Student(firstName, surName, newBirthDate, faculty, scoreBase);
         }
@@ -52,17 +59,26 @@ public class StudentBase implements ConsoleInputStudents, AverageScore {
             Date dateScore = simpleDateFormat.parse(scoreDate);
             Subjects subjects;
             System.out.println("input subject");
-            final String addsubject = scanner.nextLine();
-            subjects = switch (addsubject) {
-                case "economy" -> Subjects.ECONOMY;
-                case "HM" -> Subjects.HIGHER_MATHEMATICS;
-                case "HRB" -> Subjects.HISTORY_RB;
-                case "JP" -> Subjects.JURISPRUDENCE;
-                case "WP" -> Subjects.WORLD_PHILOSOPHY;
-                case "statistic" -> Subjects.STATISTICS;
-                default -> Subjects.ZOOLOGY;
-            };
-            System.out.println("input score on the givven subject");
+            final String addSubject = scanner.nextLine().toUpperCase();
+            if (addSubject.equals(Subjects.ECONOMY.toString())) {
+                subjects = Subjects.ECONOMY;
+            } else if (addSubject.equals(Subjects.HIGHER_MATHEMATICS.toString())) {
+                subjects = Subjects.HIGHER_MATHEMATICS;
+            } else if (addSubject.equals(Subjects.HISTORY_RB.toString())) {
+                subjects = Subjects.HISTORY_RB;
+            } else if (addSubject.equals(Subjects.JURISPRUDENCE.toString())) {
+                subjects = Subjects.JURISPRUDENCE;
+            } else if (addSubject.equals(Subjects.WORLD_PHILOSOPHY.toString())) {
+                subjects = Subjects.WORLD_PHILOSOPHY;
+            } else if (addSubject.equals(Subjects.STATISTICS.toString())) {
+                subjects = Subjects.STATISTICS;
+            } else if (addSubject.equals(Subjects.ZOOLOGY.toString())) {
+                subjects = Subjects.ZOOLOGY;
+            } else {
+                System.out.println("Incorrect input of subject");
+                break;
+            }
+            System.out.println("input score on the given subject");
             final int score = scanner.nextInt();
 
             subjectsScore[i] = new ScoreBase(subjects, score, dateScore);
@@ -76,13 +92,13 @@ public class StudentBase implements ConsoleInputStudents, AverageScore {
         System.out.println("Input the student's surname to search for");
         String searchSurName = scanner.nextLine();
         double averageScore = 0;
-        for (Student searchstudent : base) {
-            if (searchSurName.equals(searchstudent.getSurName())) {
+        for (Student searchStudent : base) {
+            if (searchSurName.equals(searchStudent.getSurName())) {
                 //обратиться к значению оценок и предметов в массиве студентов
                 for (ScoreBase scoreBase : subjectsScore) {
                     averageScore += scoreBase.scores() / (double) subjectsScore.length;
                 }
-                System.out.println("name of student: " + searchstudent.getSurName() + ", average score is: " + averageScore);
+                System.out.println("name of student: " + searchStudent.getSurName() + ", average score is: " + averageScore);
             }
         }
     }
@@ -92,8 +108,8 @@ public class StudentBase implements ConsoleInputStudents, AverageScore {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input the student's surname to search for");
         String searchSurName = scanner.nextLine();
-        for (Student searhStudent : base) {
-            if (searchSurName.equals(searhStudent.getSurName())) {
+        for (Student searchStudent : base) {
+            if (searchSurName.equals(searchStudent.getSurName())) {
                 for (int i = 0; i < subjectsScore.length; i++) {
                     subjectsScore[i] = new ScoreBase(subjectsScore[i].subjects(), subjectsScore[i].scores(), subjectsScore[i].date());
                 }

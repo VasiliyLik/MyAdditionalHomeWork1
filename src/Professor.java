@@ -3,14 +3,22 @@
 import java.time.LocalDate;
 
 public class Professor extends Person {
-    //private Date birthDate;
     private final Subjects subjectTeacher;
+
+    public Subjects getSubjectTeacher() {
+        return subjectTeacher;
+    }
+
     private final LocalDate birthDate;
 
     public Professor(String firstName, String surName, LocalDate birthDate, Subjects subjectTeacher) {
         super(firstName, surName);
         this.birthDate = birthDate;
         this.subjectTeacher = subjectTeacher;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
     @Override
@@ -21,9 +29,5 @@ public class Professor extends Person {
                 "birthDate='" + getBirthDate() + '\'' +
                 ", subjectTeacher=" + subjectTeacher +
                 '}';
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
     }
 }

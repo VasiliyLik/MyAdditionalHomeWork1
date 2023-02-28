@@ -5,4 +5,4 @@ public enum Faculties {
     LAW,
     BIOLOGY,
     PHILOSOPHY
-    }
+}

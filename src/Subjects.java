@@ -6,8 +6,5 @@ public enum Subjects {
     JURISPRUDENCE,
     STATISTICS,
     WORLD_PHILOSOPHY,
-    ZOOLOGY;
-
-    Subjects() {
-    }
+    ZOOLOGY
 }

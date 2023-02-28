@@ -1,13 +1,8 @@
 //класс Enum дней недели
-public enum WeekDays {
-    SUNDAY,
+public enum WorkDays {
     MONDAY,
     TUESDAY,
     WEDNESDAY,
     THURSDAY,
     FRIDAY,
-    SATURDAY;
-
-    WeekDays() {
-    }
 }
